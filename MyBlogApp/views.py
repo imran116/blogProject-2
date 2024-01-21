@@ -3,4 +3,4 @@ from django.urls import reverse
 
 
 def Index(request):
-    return HttpResponse("hello world.")
+    return HttpResponseRedirect(reverse('blog_app:blog_home'))

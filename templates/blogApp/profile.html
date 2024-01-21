@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title_block %} Profile Setting {% endblock %}
+
+{% block styles %}
+  <link href="{% static 'profile.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block main_block %}
+
+<div class="container">
+  <div class="container-left col-3 alert alert-primary">
+      <img src="{% static 'profile.jpeg' %}" class="rounded-circle profile-pic" alt="profile-image" >
+{#      <a class="rounded-circle profile-pic" href="">add</a>#}
+
+      <div class="profile-text" style="text-align: center;margin-top: 20px">
+        <h6> Full Name</h6>
+        <h6> @{{ user.username }}</h6>
+        <h6> {{ user.email }}</h6>
+          <br>
+         <a href="" class="btn btn-info">Edit Profile</a>
+      </div>
+
+  </div>
+  <div class="container-right col-8 alert alert-info"></div>
+</div>
+
+{% endblock %}

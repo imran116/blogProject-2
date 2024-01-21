@@ -1,0 +1,16 @@
+
+.container {
+    background-color: #f7f7f1;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 20px;
+    color: black;
+    font-family: "monospace", monospace;
+    font-size: 16px;
+    border: 2px solid #F0F0E3;
+    box-shadow: 10px 10px 58px 15px lightblue;
+}
+.paragraph{
+    font-size: 15px;
+    margin-top: 8px;
+}
