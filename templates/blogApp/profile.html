@@ -15,11 +15,17 @@
 {#      <a class="rounded-circle profile-pic" href="">add</a>#}
 
       <div class="profile-text" style="text-align: center;margin-top: 20px">
-        <h6> Full Name</h6>
+          {% if user.first_name or user.last_name %}
+        <h6> {{ user.first_name}} {{ user.last_name }}</h6>
+          {% else %}
+          <a href="{% url 'blog_app:profile_change' %}">add full name</a>
+          {% endif %}
+
+
         <h6> @{{ user.username }}</h6>
         <h6> {{ user.email }}</h6>
           <br>
-         <a href="" class="btn btn-info">Edit Profile</a>
+         <a href="{% url 'blog_app:profile_change' %}" class="btn btn-info">Edit Profile</a>
       </div>
 
   </div>

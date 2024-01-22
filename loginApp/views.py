@@ -1,8 +1,10 @@
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from loginApp.forms import UserForm
+
 from django.contrib.auth.models import User
 
 
@@ -39,6 +41,11 @@ def login_view(request):
     return render(request, 'loginApp/login.html', context={'form': form})
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+
+
