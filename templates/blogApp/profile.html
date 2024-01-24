@@ -11,8 +11,15 @@
 
 <div class="container">
   <div class="container-left col-3 alert alert-primary">
-      <img src="{% static 'profile.jpeg' %}" class="rounded-circle profile-pic" alt="profile-image" >
-{#      <a class="rounded-circle profile-pic" href="">add</a>#}
+  {% if user.user_profile %}
+      <img src="/media/{{ user.user_profile.profile_picture }}" class="rounded-circle profile-pic" alt="profile-image" >
+       <a href="{% url 'blog_app:profile-picture' %}" style="margin-left: 100px">change</a>
+  {% else %}
+      <img src="/media/default_profile.jpg" class="rounded-circle profile-pic" alt="profile-image" >
+      <a href="{% url 'blog_app:profile-picture' %}" style="margin-left: 100px">upload</a>
+  {% endif %}
+
+
 
       <div class="profile-text" style="text-align: center;margin-top: 20px">
           {% if user.first_name or user.last_name %}
@@ -20,8 +27,6 @@
           {% else %}
           <a href="{% url 'blog_app:profile_change' %}">add full name</a>
           {% endif %}
-
-
         <h6> @{{ user.username }}</h6>
         <h6> {{ user.email }}</h6>
           <br>

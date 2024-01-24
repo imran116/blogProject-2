@@ -32,7 +32,7 @@
           <a class="nav-link" href="{% url 'blog_app:profile' %}" style="margin:0 30px 0 50px">{{ user.username }}</a>
           <a class="nav-link" href="{% url 'login_app:logout' %}" style="margin:0 30px 0 0">Logout</a>
                 {% else %}
-                <a class="nav-link" href="{% url 'login_app:register' %} " style="margin:0 30px 0 50px">Register</a>
+                <a class="nav-link" href="{% url 'login_app:register' %} " style="margin:0 30px 0 50px">SignUp</a>
                 <a class="nav-link" href="{% url 'login_app:login' %}" style="margin:0 30px 0 0">login</a>
             {% endif %}
     </div>
@@ -40,6 +40,7 @@
 </nav>
          </div>
         {% block main_block %}
+
         {% endblock %}
 </body>
 </html>

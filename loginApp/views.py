@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from loginApp.forms import UserForm
+from loginApp.forms import UserForm, ProfilePictureForm
 
 from django.contrib.auth.models import User
 
