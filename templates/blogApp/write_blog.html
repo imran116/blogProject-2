@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title_block %} Write Blog {% endblock %}
+{#<link href="{% static 'login_register.css' %}" rel="stylesheet">#}
+
+{% block main_block %}
+    <div class="container col-8" style="padding: 30px">
+        <form method="POST" enctype="multipart/form-data">
+            {{ form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-lg">Post</button>
+        </form>
+    </div>
+
+{% endblock %}

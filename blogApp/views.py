@@ -1,17 +1,24 @@
+import uuid
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.views.generic import ListView, CreateView
+
 from loginApp.models import UserProfile
+from blogApp.models import Blog
 
 from loginApp.forms import ProfileChangeForm, ProfilePictureForm
 
 
 # Create your views here.
 
-def blog(request):
-    return render(request, 'blogApp/blog_index.html', context={'j': "hello i am form blog.page.html"})
+class BlogListView(ListView):
+    context_object_name = 'blogs'
+    model = Blog
+    template_name = 'blogApp/blog_index.html'
 
 
 def profile_setting(request):
@@ -53,3 +60,17 @@ def profile_info(request):
             return HttpResponseRedirect(reverse('blog_app:profile'))
 
     return render(request, 'blogApp/profile_pic.html', context={'form': form, 'profile_img': profile_img})
+
+
+class CreateBlog(CreateView):
+    model = Blog
+    fields = ('blog_image', 'blog_title', 'blog_content', )
+    template_name = 'blogApp/write_blog.html'
+
+    def form_valid(self, form):
+        form_obj = form.save(commit=False)
+        form_obj.author = self.request.user
+        title = form_obj.blog_title
+        form_obj.slug = title.replace(" ", "-") + "-" + str(uuid.uuid4())
+        form_obj.save()
+        return HttpResponseRedirect(reverse('index'))
