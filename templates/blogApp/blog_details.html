@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title_block %} {{ blog.slug }} {% endblock %}
+{% block main_block %}
+
+    <div class="container col-8" style="padding: 40px">
+
+    <div class="card" >
+  <img style="height: 300px;object-fit: fill" class="card-img-top" src="{{ blog.blog_image.url }}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{ blog.blog_title }}</h5>
+    <p class="card-text">{{ blog.blog_content|linebreaks }}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+
+    </div>
+
+{{ blog.blog_title }}
+{% endblock %}

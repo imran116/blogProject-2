@@ -64,7 +64,7 @@ def profile_info(request):
 
 class CreateBlog(CreateView):
     model = Blog
-    fields = ('blog_image', 'blog_title', 'blog_content', )
+    fields = ('blog_image', 'blog_title', 'blog_content',)
     template_name = 'blogApp/write_blog.html'
 
     def form_valid(self, form):
@@ -74,3 +74,8 @@ class CreateBlog(CreateView):
         form_obj.slug = title.replace(" ", "-") + "-" + str(uuid.uuid4())
         form_obj.save()
         return HttpResponseRedirect(reverse('index'))
+
+
+def blog_details(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    return render(request, 'blogApp/blog_details.html', context={'blog': blog})
