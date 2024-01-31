@@ -16,6 +16,12 @@ class Blog(models.Model):
     def __str__(self):
         return self.blog_title
 
+    def short_content(self):
+        return self.blog_content[0:250]
+
+    class Meta:
+        ordering = ['-update_date']
+
 
 class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='blog_comment')

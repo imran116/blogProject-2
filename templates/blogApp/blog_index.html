@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block title_block %} Home Page {% endblock %}
 {% block main_block %}
+    <div class="container col-12" style="padding: 40px;">
+         {% for blog in blogs %}
+        <div class="card mb-6" style="margin-bottom: 25px" >
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ blog.blog_image.url }}" class="img-fluid rounded-start" alt="..." style="height: 200px;width: 100%;object-fit: fill">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{ blog.blog_title }}</h5>
+        <p class="card-text">{{ blog.short_content }}</p>
+        <p class="card-text"><small class="text-body-secondary">Published {{ blog.update_date|timesince }} ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>
+         {% endfor %}
+    </div>
 
 {% endblock %}
