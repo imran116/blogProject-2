@@ -19,6 +19,9 @@ class Blog(models.Model):
     def short_content(self):
         return self.blog_content[0:250]
 
+    def get_comment(self):
+        return self.blog_comment.all()
+
     class Meta:
         ordering = ['-update_date']
 

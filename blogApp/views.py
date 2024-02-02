@@ -1,16 +1,17 @@
 import uuid
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.views.generic import ListView, CreateView
 
 from loginApp.models import UserProfile
-from blogApp.models import Blog
+from blogApp.models import Blog, Comment
 
 from loginApp.forms import ProfileChangeForm, ProfilePictureForm
+from blogApp.forms import CommentForm
 
 
 # Create your views here.
@@ -78,4 +79,26 @@ class CreateBlog(CreateView):
 
 def blog_details(request, slug):
     blog = Blog.objects.get(slug=slug)
+
     return render(request, 'blogApp/blog_details.html', context={'blog': blog})
+
+
+def comment_view(request, blog_id):
+    if request.method == 'POST':
+        slug = Blog.objects.get(pk=blog_id)
+        slugg = slug.slug
+        print(slugg)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.data['comment']
+            Comment.objects.create(
+                user=request.user,
+                blog_id=blog_id,
+                comment=comment,
+            ).save()
+            return HttpResponseRedirect(reverse('blog_app:blog-details',kwargs={'slug':slugg}))
+
+    return render(request, 'blogApp/blog_details.html')
+
+
+

@@ -4,16 +4,40 @@
 
     <div class="container col-8" style="padding: 40px">
 
-    <div class="card" >
-  <img style="height: 300px;object-fit: fill" class="card-img-top" src="{{ blog.blog_image.url }}" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{ blog.blog_title }}</h5>
-    <p class="card-text">{{ blog.blog_content|linebreaks }}</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+        <div class="card">
+            <img style="height: 300px;object-fit: fill" class="card-img-top" src="{{ blog.blog_image.url }}"
+                 alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ blog.blog_title }}</h5>
+                <p class="card-text">{{ blog.blog_content|linebreaks }}</p>
+            </div>
+        </div>
+    <div>
+        <br>
+        <h6>Comment</h6>
+        <hr>
+        <form method="POST" action="{% url 'blog_app:blog-comment' blog_id=blog.pk %}">
+            {% csrf_token %}
+            <input type="text" name="comment" placeholder="comment here!">
+            <button type="submit" value="button" class="btn btn-success"> comment</button>
+            <br>
+        </form>
+
+        {% for comment in blog.get_comment %}
+        <div style="border: 1px solid gray ;border-radius: 5px; margin: 10px 0 10px 0">
+        <div class="col-8" style="display: flex;padding: 10px">
+            <i class="fa-regular fa-user fa-lg" style="margin-top: 8px;margin-right: 5px"></i>
+            <strong>{{ comment.user }}</strong>
+            <p style="margin-left: 10px">{{ comment.comment_date|timesince }}</p>
+        </div>
+        <p style="margin-left: 35px">{{ comment.comment }}</p>
+        </div>
+{% endfor %}
+
 
     </div>
 
-{{ blog.blog_title }}
+    </div>
+
+    {{ blog.blog_title }}
 {% endblock %}

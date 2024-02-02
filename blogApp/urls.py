@@ -9,6 +9,7 @@ urlpatterns = [
     path('profile-change/', views.profile_change, name='profile_change'),
     path('profile-picture/', views.profile_info, name='profile-picture'),
     path('write-blog/', views.CreateBlog.as_view(), name='create-blog'),
-    path('blog-details/<path:slug>/', views.blog_details, name='blog-details'),
+    path('blog-details/<slug:slug>/', views.blog_details, name='blog-details'),
+    path('blog-comment/<int:blog_id>/', views.comment_view, name='blog-comment'),
 
 ]
