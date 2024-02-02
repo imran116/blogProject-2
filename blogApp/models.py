@@ -34,10 +34,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
+
     class Meta:
-        ordering = ['-comment_date',]
+        ordering = ['-comment_date', ]
 
 
 class Like(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='liked_blog')
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='liked_user')
+
+
+class Unlike(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='Unliked_blog')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Unliked_user')

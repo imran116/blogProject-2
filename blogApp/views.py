@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, CreateView
 
 from loginApp.models import UserProfile
-from blogApp.models import Blog, Comment, Like
+from blogApp.models import Blog, Comment, Like, Unlike
 
 from loginApp.forms import ProfileChangeForm, ProfilePictureForm
 from blogApp.forms import CommentForm
@@ -109,6 +109,9 @@ def like(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     user = request.user
     already_liked = Like.objects.filter(blog=blog, user=user)
+    unliked = Unlike.objects.filter(user=user,blog=blog)
+    unliked.delete()
+
     if not already_liked:
         liked_post = Like(blog=blog, user=user)
         liked_post.save()
@@ -116,8 +119,11 @@ def like(request, blog_id):
 
 
 def unlike(request, blog_id):
+
     blog = Blog.objects.get(pk=blog_id)
     user = request.user
+    unliked = Unlike(blog=blog, user=user)
+    unliked.save()
     already_liked = Like.objects.filter(user=user, blog=blog)
     already_liked.delete()
     return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug':blog.slug}))
