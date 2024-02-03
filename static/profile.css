@@ -4,8 +4,8 @@
     justify-content: space-between;
 }
 .profile-pic{
-    height: 57%;
-    width: 99%;
+    height: 208px;
+    width: 204px;
     object-fit: contain;
     border: 1px solid cornflowerblue;
     margin-left: auto;

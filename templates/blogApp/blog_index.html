@@ -2,23 +2,45 @@
 {% block title_block %} Home Page {% endblock %}
 {% block main_block %}
     <div class="container col-12" style="padding: 40px;">
-         {% for blog in blogs %}
-        <div class="card mb-6" style="margin-bottom: 25px" >
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{{ blog.blog_image.url }}" class="img-fluid rounded-start" alt="..." style="height: 200px;width: 100%;object-fit: fill">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{ blog.blog_title }}</h5>
-        <p class="card-text">{{ blog.short_content }}</p>
-        <p class="card-text"><a href="{% url 'blog_app:blog-details' slug=blog.slug|urlencode %}">Read more...</a></p>
-        <p class="card-text"><small class="text-body-secondary">like {{ blog.liked_blog.count }} | comment {{ blog.blog_comment.count }}, Published {{ blog.update_date|timesince }} ago</small></p>
-      </div>
-    </div>
-  </div>
-</div>
-         {% endfor %}
+        {% if blogs %}
+            {% if number_of_blogs %}
+            <h5>{{ number_of_blogs }} Blog{{ number_of_blogs|pluralize }} Found.</h5>
+            <hr>
+            {% endif %}
+            {% for blog in blogs %}
+
+                <div class="card mb-6" style="margin-bottom: 25px">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ blog.blog_image.url }}" class="img-fluid rounded-start" alt="..."
+                                 style="height: 200px;width: 100%;object-fit: fill">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ blog.blog_title }}</h5>
+                                <p class="card-text">{{ blog.short_content }}</p>
+                                {% if user.is_authenticated %}
+                                    <p class="card-text"><a
+                                        href="{% url 'blog_app:blog-details' slug=blog.slug|urlencode %}">Read
+                                    more...</a></p>
+                                    {% else %}
+                                    <p class="card-text"><a
+                                        href="{% url 'login_app:login' %}">Read
+                                    more...</a></p>
+                                {% endif %}
+
+                                <p class="card-text"><small class="text-body-secondary">like {{ blog.liked_blog.count }}
+                                    |
+                                    comment {{ blog.blog_comment.count }}, Published {{ blog.update_date|timesince }}
+                                    ago</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h3>No Results Found!!</h3>
+        {% endif %}
     </div>
 
 {% endblock %}
