@@ -22,8 +22,10 @@ class BlogListView(ListView):
     template_name = 'blogApp/blog_index.html'
 
 
-def profile_setting(request):
-    return render(request, 'blogApp/profile.html', context={})
+def profile_setting(request, profile_id):
+    blog = Blog.objects.filter(author_id=profile_id)
+
+    return render(request, 'blogApp/profile.html', context={'blogs': blog})
 
 
 def profile_change(request):
@@ -58,7 +60,7 @@ def profile_info(request):
                 profile_obj.user = request.user
                 profile_obj.save()
 
-            return HttpResponseRedirect(reverse('blog_app:profile'))
+            return HttpResponseRedirect(reverse('blog_app:profile',kwargs={'profile_id':request.user.id}))
 
     return render(request, 'blogApp/profile_pic.html', context={'form': form, 'profile_img': profile_img})
 
@@ -109,21 +111,20 @@ def like(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     user = request.user
     already_liked = Like.objects.filter(blog=blog, user=user)
-    unliked = Unlike.objects.filter(user=user,blog=blog)
+    unliked = Unlike.objects.filter(user=user, blog=blog)
     unliked.delete()
 
     if not already_liked:
         liked_post = Like(blog=blog, user=user)
         liked_post.save()
-    return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug':blog.slug}))
+    return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug': blog.slug}))
 
 
 def unlike(request, blog_id):
-
     blog = Blog.objects.get(pk=blog_id)
     user = request.user
     unliked = Unlike(blog=blog, user=user)
     unliked.save()
     already_liked = Like.objects.filter(user=user, blog=blog)
     already_liked.delete()
-    return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug':blog.slug}))
+    return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug': blog.slug}))

@@ -46,7 +46,7 @@
                             {{ user.username }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="nav-link " href="{% url 'blog_app:profile' %}">Profile</a></li>
+                            <li><a class="nav-link " href="{% url 'blog_app:profile' user.id %}">Profile</a></li>
                             <li><a class="nav-link" href="{% url 'login_app:logout' %}">Logout</a></li>
                         </ul>
                     </div>
