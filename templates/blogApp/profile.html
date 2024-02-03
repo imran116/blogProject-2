@@ -36,10 +36,10 @@
 
         </div>
         <div class="container-right col-8 alert alert-info">
-             <h3><strong>BLOG DASHBOARD</strong></h3>
-        <hr>
-            {% for blog in blogs %}
+            <h3><strong>BLOG DASHBOARD</strong></h3>
+            <hr>
 
+            {% for blog in blogs %}
                 <div class="blog-text alert alert-success">
                     <h4>{{ blog.blog_title }}</h4>
                     <div style="display: flex;">
@@ -52,9 +52,14 @@
                         <p style="margin-right: 15px"><i class="fa-solid fa-message"
                                                          style="margin-right: 5px"></i>{{ blog.blog_comment.count }}
                         </p>
+                        <p style="margin-right: 15px"><i class="fa-solid fa-cloud-arrow-up"
+                                                         style="margin-right: 5px"></i>{{ blog.publish_date }}
+                        </p>
+                        <p style="margin-right: 15px"><i class="fa-solid fa-hourglass-start" style="margin-right: 5px"></i>{{ blog.update_date|timesince }}
+                        </p>
                     </div>
                     <a href="{% url 'blog_app:blog-details' blog.slug %}" class="btn btn-primary btn-sm">View</a>
-                    <a class="btn btn-success btn-sm">Edit</a>
+                    <a href="{% url 'blog_app:update-blog' blog.pk %}" class="btn btn-success btn-sm">Update</a>
                     <a href="" class="btn btn-danger btn-sm">Delete</a>
 
                 </div>

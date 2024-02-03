@@ -3,10 +3,10 @@ import uuid
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 
 from loginApp.models import UserProfile
 from blogApp.models import Blog, Comment, Like, Unlike
@@ -70,6 +70,14 @@ class CreateBlog(CreateView):
     model = Blog
     fields = ('blog_image', 'blog_title', 'blog_content',)
     template_name = 'blogApp/write_blog.html'
+
+
+class UpdateBlog(UpdateView):
+    model = Blog
+    fields = ['blog_image', 'blog_title', 'blog_content']
+    template_name = 'blogApp/write_blog.html'
+
+
 
     def form_valid(self, form):
         form_obj = form.save(commit=False)
@@ -135,4 +143,4 @@ def search_blog(request):
     search_text = request.GET.get('q')
     blog = Blog.objects.filter(Q(blog_title__icontains=search_text))
     number_of_blog = blog.count()
-    return render(request, 'blogApp/blog_index.html', context={'blogs': blog,'number_of_blogs':number_of_blog})
+    return render(request, 'blogApp/blog_index.html', context={'blogs': blog, 'number_of_blogs': number_of_blog})
