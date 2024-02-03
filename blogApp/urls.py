@@ -13,6 +13,5 @@ urlpatterns = [
     path('blog-comment/<int:blog_id>/', views.comment_view, name='blog-comment'),
     path('blog-like/<int:blog_id>/', views.like, name='blog-like'),
     path('blog-unlike/<int:blog_id>/', views.unlike, name='blog-unlike'),
-    path('search-blog/', views.search_blog, name='search-blog'),
 
 ]
