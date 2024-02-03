@@ -1,6 +1,7 @@
 import uuid
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse
 from django.urls import reverse
@@ -60,7 +61,7 @@ def profile_info(request):
                 profile_obj.user = request.user
                 profile_obj.save()
 
-            return HttpResponseRedirect(reverse('blog_app:profile',kwargs={'profile_id':request.user.id}))
+            return HttpResponseRedirect(reverse('blog_app:profile', kwargs={'profile_id': request.user.id}))
 
     return render(request, 'blogApp/profile_pic.html', context={'form': form, 'profile_img': profile_img})
 
@@ -128,3 +129,9 @@ def unlike(request, blog_id):
     already_liked = Like.objects.filter(user=user, blog=blog)
     already_liked.delete()
     return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug': blog.slug}))
+
+
+def search_blog(request):
+    search_text = request.GET.get('q')
+    blog = Blog.objects.filter(Q(blog_title__icontains=search_text))
+    return render(request, 'blogApp/blog_index.html', context={'blogs': blog})
