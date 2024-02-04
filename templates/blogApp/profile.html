@@ -55,7 +55,8 @@
                         <p style="margin-right: 15px"><i class="fa-solid fa-cloud-arrow-up"
                                                          style="margin-right: 5px"></i>{{ blog.publish_date }}
                         </p>
-                        <p style="margin-right: 15px"><i class="fa-solid fa-hourglass-start" style="margin-right: 5px"></i>{{ blog.update_date|timesince }}
+                        <p style="margin-right: 15px"><i class="fa-solid fa-hourglass-start"
+                                                         style="margin-right: 5px"></i>{{ blog.update_date|timesince }}
                         </p>
                     </div>
                     <a href="{% url 'blog_app:blog-details' blog.slug %}" class="btn btn-primary btn-sm">View</a>

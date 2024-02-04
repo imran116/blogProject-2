@@ -2,13 +2,13 @@
 {% block title_block %}Delete Blog{% endblock %}
 
 {% block main_block %}
-<div class="container" style="padding: 30px">
- <h4>Are you sure you want to delete "{{ blogs.blog_title }}" ?</h4>
-<form method="post">
-    {% csrf_token %}
-    <br>
-    <button type="submit" class="btn btn-warning">Delete</button>
-</form>
+    <div class="container" style="padding: 30px">
+        <h4>Are you sure you want to delete "{{ blogs.blog_title }}" ?</h4>
+        <form method="post">
+            {% csrf_token %}
+            <br>
+            <button type="submit" class="btn btn-warning">Delete</button>
+        </form>
 
-</div>
+    </div>
 {% endblock %}

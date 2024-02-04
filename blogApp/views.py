@@ -1,11 +1,10 @@
 import uuid
-
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.urls import reverse
-from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from loginApp.models import UserProfile
@@ -23,12 +22,14 @@ class BlogListView(ListView):
     template_name = 'blogApp/blog_index.html'
 
 
+@login_required
 def profile_setting(request, profile_id):
     blog = Blog.objects.filter(author_id=profile_id)
 
     return render(request, 'blogApp/profile.html', context={'blogs': blog})
 
 
+@login_required
 def profile_change(request):
     current_user = request.user
     form = ProfileChangeForm(instance=current_user)
@@ -66,7 +67,7 @@ def profile_info(request):
     return render(request, 'blogApp/profile_pic.html', context={'form': form, 'profile_img': profile_img})
 
 
-class CreateBlog(CreateView):
+class CreateBlog(LoginRequiredMixin, CreateView):
     model = Blog
     fields = ('blog_image', 'blog_title', 'blog_content',)
     template_name = 'blogApp/write_blog.html'
@@ -80,17 +81,17 @@ class CreateBlog(CreateView):
         return HttpResponseRedirect(reverse('index'))
 
 
-class UpdateBlog(UpdateView):
+class UpdateBlog(LoginRequiredMixin, UpdateView):
     model = Blog
     fields = ['blog_image', 'blog_title', 'blog_content']
     template_name = 'blogApp/write_blog.html'
 
     def get_success_url(self):
         profile_id = self.object.author.id
-        return reverse_lazy('blog_app:profile', kwargs={'profile_id':profile_id})
+        return reverse_lazy('blog_app:profile', kwargs={'profile_id': profile_id})
 
 
-class DeleteBlog(DeleteView):
+class DeleteBlog(LoginRequiredMixin, DeleteView):
     model = Blog
     template_name = 'blogApp/blog_delete.html'
     context_object_name = 'blogs'
@@ -100,6 +101,7 @@ class DeleteBlog(DeleteView):
         return reverse_lazy('blog_app:profile', kwargs={'profile_id': profile_id})
 
 
+@login_required
 def blog_details(request, slug):
     blog = Blog.objects.get(slug=slug)
     user = request.user
@@ -112,6 +114,7 @@ def blog_details(request, slug):
     return render(request, 'blogApp/blog_details.html', context={'blog': blog, 'liked_post': liked_post})
 
 
+@login_required
 def comment_view(request, blog_id):
     if request.method == 'POST':
         blog = Blog.objects.get(pk=blog_id)
@@ -128,6 +131,7 @@ def comment_view(request, blog_id):
     return render(request, 'blogApp/blog_details.html')
 
 
+@login_required
 def like(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     user = request.user
@@ -141,6 +145,7 @@ def like(request, blog_id):
     return HttpResponseRedirect(reverse('blog_app:blog-details', kwargs={'slug': blog.slug}))
 
 
+@login_required
 def unlike(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     user = request.user

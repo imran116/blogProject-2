@@ -15,11 +15,19 @@
         <div style="display: flex;padding: 20px;justify-content: space-between;width: 22%;">
 
             {% if not liked_post %}
-               <a style="text-decoration: none;margin-right: 10px" href="{% url 'blog_app:blog-like' blog.pk %}">{{ blog.liked_blog.count }}<i style="margin-left:8px;" class="fa-regular fa-thumbs-up fa-2xl"></i></a>
-                <a style="text-decoration: none;margin-right: 10px" href="{% url 'blog_app:blog-unlike' blog.pk %}">{{ blog.Unliked_blog.count }}<i style="margin-left:8px;" class="fa-solid fa-thumbs-down fa-2xl"></i></a>
+                <a style="text-decoration: none;margin-right: 10px"
+                   href="{% url 'blog_app:blog-like' blog.pk %}">{{ blog.liked_blog.count }}<i style="margin-left:8px;"
+                                                                                               class="fa-regular fa-thumbs-up fa-2xl"></i></a>
+                <a style="text-decoration: none;margin-right: 10px"
+                   href="{% url 'blog_app:blog-unlike' blog.pk %}">{{ blog.Unliked_blog.count }}<i
+                        style="margin-left:8px;" class="fa-solid fa-thumbs-down fa-2xl"></i></a>
             {% else %}
-                <a style="text-decoration: none;margin-right: 10px" href="{% url 'blog_app:blog-like' blog.pk %}">{{ blog.liked_blog.count }}<i style="margin-left:8px;" class="fa-solid fa-thumbs-up fa-2xl"></i></a>
-                <a style="text-decoration: none;margin-right: 10px" href="{% url 'blog_app:blog-unlike' blog.pk %}">{{ blog.Unliked_blog.count }}<i style="margin-left:8px;" class="fa-regular fa-thumbs-down fa-2xl"></i></a>
+                <a style="text-decoration: none;margin-right: 10px"
+                   href="{% url 'blog_app:blog-like' blog.pk %}">{{ blog.liked_blog.count }}<i style="margin-left:8px;"
+                                                                                               class="fa-solid fa-thumbs-up fa-2xl"></i></a>
+                <a style="text-decoration: none;margin-right: 10px"
+                   href="{% url 'blog_app:blog-unlike' blog.pk %}">{{ blog.Unliked_blog.count }}<i
+                        style="margin-left:8px;" class="fa-regular fa-thumbs-down fa-2xl"></i></a>
 
             {% endif %}
 

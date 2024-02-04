@@ -6,26 +6,26 @@
 <head>
     <meta charset="UTF-8">
     {% block title_block %} Profile Picture Upload {% endblock %}
-{% block styles %}
-    <link href="{% static 'login_register.css' %}" rel="stylesheet">
-{% endblock %}
+    {% block styles %}
+        <link href="{% static 'login_register.css' %}" rel="stylesheet">
+    {% endblock %}
 </head>
 <body>
 {% block main_block %}
     <div class="container col-5">
-    {% if profile_img %}
-        <div class="alert alert-success">
-            <h4>Profile Picture Upload Successful!</h4>
-        </div>
+        {% if profile_img %}
+            <div class="alert alert-success">
+                <h4>Profile Picture Upload Successful!</h4>
+            </div>
         {% endif %}
 
-    <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
 
-    {{form|crispy }}
-    {% csrf_token %}
-    <button type="submit" class="alert alert-success btn btn-sm">Upload</button>
+            {{ form|crispy }}
+            {% csrf_token %}
+            <button type="submit" class="alert alert-success btn btn-sm">Upload</button>
 
-</form>
+        </form>
     </div>
 
 {% endblock %}

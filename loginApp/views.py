@@ -2,10 +2,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
-from loginApp.forms import UserForm, ProfilePictureForm
-
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from loginApp.forms import UserForm
 
 
 # Create your views here.
@@ -24,6 +22,7 @@ def register_view(request):
         'register': register,
     }
     return render(request, 'loginApp/register.html', context=context)
+
 
 
 def login_view(request):

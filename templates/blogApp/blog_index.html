@@ -4,8 +4,8 @@
     <div class="container col-12" style="padding: 40px;">
         {% if blogs %}
             {% if number_of_blogs %}
-            <h5>{{ number_of_blogs }} Blog{{ number_of_blogs|pluralize }} Found.</h5>
-            <hr>
+                <h5>{{ number_of_blogs }} Blog{{ number_of_blogs|pluralize }} Found.</h5>
+                <hr>
             {% endif %}
             {% for blog in blogs %}
 
@@ -21,12 +21,12 @@
                                 <p class="card-text">{{ blog.short_content }}</p>
                                 {% if user.is_authenticated %}
                                     <p class="card-text"><a
-                                        href="{% url 'blog_app:blog-details' slug=blog.slug|urlencode %}">Read
-                                    more...</a></p>
-                                    {% else %}
+                                            href="{% url 'blog_app:blog-details' slug=blog.slug|urlencode %}">Read
+                                        more...</a></p>
+                                {% else %}
                                     <p class="card-text"><a
-                                        href="{% url 'login_app:login' %}">Read
-                                    more...</a></p>
+                                            href="{% url 'login_app:login' %}">Read
+                                        more...</a></p>
                                 {% endif %}
 
                                 <p class="card-text"><small class="text-body-secondary">like {{ blog.liked_blog.count }}
