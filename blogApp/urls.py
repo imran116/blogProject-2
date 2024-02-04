@@ -10,6 +10,7 @@ urlpatterns = [
     path('profile-picture/', views.profile_info, name='profile-picture'),
     path('write-blog/', views.CreateBlog.as_view(), name='create-blog'),
     path('update-blog/<int:pk>', views.UpdateBlog.as_view(), name='update-blog'),
+    path('delete-blog/<int:pk>', views.DeleteBlog.as_view(), name='delete-blog'),
     path('blog-details/<slug:slug>/', views.blog_details, name='blog-details'),
     path('blog-comment/<int:blog_id>/', views.comment_view, name='blog-comment'),
     path('blog-like/<int:blog_id>/', views.like, name='blog-like'),

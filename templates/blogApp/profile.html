@@ -60,7 +60,7 @@
                     </div>
                     <a href="{% url 'blog_app:blog-details' blog.slug %}" class="btn btn-primary btn-sm">View</a>
                     <a href="{% url 'blog_app:update-blog' blog.pk %}" class="btn btn-success btn-sm">Update</a>
-                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="{% url 'blog_app:delete-blog' blog.pk %}" class="btn btn-danger btn-sm">Delete</a>
 
                 </div>
             {% endfor %}

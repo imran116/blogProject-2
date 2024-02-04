@@ -6,7 +6,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.urls import reverse, reverse_lazy
 from django.urls import reverse
 from django.contrib.auth.models import User
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from loginApp.models import UserProfile
 from blogApp.models import Blog, Comment, Like, Unlike
@@ -71,14 +71,6 @@ class CreateBlog(CreateView):
     fields = ('blog_image', 'blog_title', 'blog_content',)
     template_name = 'blogApp/write_blog.html'
 
-
-class UpdateBlog(UpdateView):
-    model = Blog
-    fields = ['blog_image', 'blog_title', 'blog_content']
-    template_name = 'blogApp/write_blog.html'
-
-
-
     def form_valid(self, form):
         form_obj = form.save(commit=False)
         form_obj.author = self.request.user
@@ -86,6 +78,26 @@ class UpdateBlog(UpdateView):
         form_obj.slug = title.replace(" ", "-") + "-" + str(uuid.uuid4())
         form_obj.save()
         return HttpResponseRedirect(reverse('index'))
+
+
+class UpdateBlog(UpdateView):
+    model = Blog
+    fields = ['blog_image', 'blog_title', 'blog_content']
+    template_name = 'blogApp/write_blog.html'
+
+    def get_success_url(self):
+        profile_id = self.object.author.id
+        return reverse_lazy('blog_app:profile', kwargs={'profile_id':profile_id})
+
+
+class DeleteBlog(DeleteView):
+    model = Blog
+    template_name = 'blogApp/blog_delete.html'
+    context_object_name = 'blogs'
+
+    def get_success_url(self):
+        profile_id = self.object.author.id
+        return reverse_lazy('blog_app:profile', kwargs={'profile_id': profile_id})
 
 
 def blog_details(request, slug):
