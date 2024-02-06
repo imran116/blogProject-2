@@ -12,10 +12,10 @@
     <script src="https://kit.fontawesome.com/c476fc70a6.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body style="background-color: lightgrey;">
 <div class="navbar-expand-lg">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary " style="background-color: red;margin: 0;padding: 0">
+        <div class="container-fluid" style="background-color: gray">
             <a class="navbar-brand" href="/">DailyBlogs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -26,18 +26,18 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                     <li class="nav-link">
-                        <a class="nav-link " aria-current="page" href="/">Home</a>
+                        <a class="nav-link " aria-current="page" href="/" style="color: black">Home</a>
                     </li>
                     <li class="nav-link">
-                        <a class="nav-link " aria-current="page" href="{% url 'blog_app:create-blog' %}">Write Blog</a>
+                        <a class="nav-link " aria-current="page" href="{% url 'blog_app:create-blog' %}" style="color: black">Write Blog</a>
                     </li>
 
                 </ul>
 
                 <form class="d-flex" role="search" method="GET" action="{% url 'blog_app:search-blog' %}">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                           name="q" id="q" style="width: 300px">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+                           name="q" id="q" style="width: 400px">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
                 </form>
                 {% if user.is_authenticated %}
                     <div class="dropdown" style="margin: 0 50px 0 30px">
@@ -46,15 +46,15 @@
                             {{ user.username }}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="nav-link " href="{% url 'blog_app:profile' user.id %}">Profile</a></li>
-                            <li><a class="nav-link" href="{% url 'login_app:logout' %}">Logout</a></li>
+                            <li><a class="nav-link " href="{% url 'blog_app:profile' user.id %}" style="color: black">Profile</a></li>
+                            <li><a class="nav-link" href="{% url 'login_app:logout' %}" style="color: black">Logout</a></li>
                         </ul>
                     </div>
 
 
                 {% else %}
-                    <a class="nav-link" href="{% url 'login_app:register' %} " style="margin:0 30px 0 50px">SignUp</a>
-                    <a class="nav-link" href="{% url 'login_app:login' %}" style="margin:0 30px 0 0">login</a>
+                    <a class="nav-link" href="{% url 'login_app:register' %} " style="margin:0 30px 0 50px; color: black">SignUp</a>
+                    <a class="nav-link" href="{% url 'login_app:login' %}" style="margin:0 30px 0 0 ;color: black">login</a>
                 {% endif %}
             </div>
         </div>
@@ -63,5 +63,34 @@
 {% block main_block %}
 
 {% endblock %}
+<footer>
+    <div class="row justify-content-center" style="background-color: gray;">
+        <div class="col-8" style="display: flex;justify-content: space-between;padding: 30px;">
+            <div>
+            <a href="/" style="text-decoration: none;color:#3e3e3e"><h4><strong>DailyBlogs</strong></h4></a>
+                <p>Number one news and blog site all over the world<br>Be with us!!</p>
+        </div>
+        <div>
+            <h6>Address:#32, House:32</h6>
+            <h6>Mirpur,Dhaka 1207</h6>
+            <h6>Bangladesh</h6>
+            <h6>+880 1303065163</h6>
+            <h6>dailyblogs@gmail.com</h6>
+        </div>
+        <div>
+            <i class="fa-brands fa-facebook fa-2xl"></i>
+            <i class="fa-brands fa-square-instagram fa-2xl"></i>
+            <i class="fa-brands fa-square-x-twitter fa-2xl"></i>
+            <i class="fa-brands fa-youtube fa-2xl"></i>
+            <i class="fa-brands fa-linkedin fa-2xl"></i>
+        </div>
+        </div>
+        <div style="text-align: center">
+        Copyright @2024 imran
+    </div>
+    </div>
+
+
+</footer>
 </body>
 </html>
