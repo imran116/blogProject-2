@@ -11,3 +11,4 @@ urlpatterns = [
                   path('', views.Index, name='index'),
                   path('<int:id>/password/', views.password_change, name='password'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
