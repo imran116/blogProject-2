@@ -129,9 +129,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Base URL to serve static files
 # Base URL to serve static files
 STATIC_URL = '/static/'
-
-# Directory where static files will be collected after running collectstatic
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Additional places where Django should look for static files
 STATICFILES_DIRS = [

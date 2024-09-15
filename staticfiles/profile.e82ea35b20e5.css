@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    margin-top: 40px;
+    justify-content: space-between;
+}
+.profile-pic{
+    height: 208px;
+    width: 204px;
+    object-fit: contain;
+    border: 1px solid cornflowerblue;
+    margin-left: auto;
+    margin-right:auto;
+    display: block;
+}
+
+.profile-change{
+    background-color: #f7f7f1;
+    padding: 30px;
+    margin-top: 30px;
+    border-radius: 20px;
+    color: black;
+    font-family: "monospace", monospace;
+    font-size: 16px;
+    border: 2px solid #F0F0E3;
+    box-shadow: 10px 10px 58px 15px lightblue;
+}
