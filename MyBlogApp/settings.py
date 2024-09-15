@@ -124,7 +124,11 @@ USE_TZ = True
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'MyBlogApp', 'static'),
+)
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Base URL to serve static files
 # Base URL to serve static files
 STATIC_URL = 'static/'
